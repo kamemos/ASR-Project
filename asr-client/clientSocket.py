@@ -18,5 +18,5 @@ socketIO.on('disconnect', on_disconnect)
 socketIO.on('reconnect', on_reconnect)
 
 def on_send_msg(text):
-    socketIO.emit('event-kaldi',{'msg':text})
+    socketIO.emit('event-kaldi', {'msg':text})
     socketIO.wait(seconds=1)
