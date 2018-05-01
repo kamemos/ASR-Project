@@ -1,6 +1,8 @@
 import React from 'react'
-import { ReactMic } from 'react-mic';
-import io from 'socket.io-client';
+import { ReactMic } from 'react-mic'
+import io from 'socket.io-client'
+import GifPlayer from 'react-gif-player'
+import '../assets/css/custom.css'
 
 class HomePage extends React.Component{
     constructor(props){
@@ -43,15 +45,8 @@ class HomePage extends React.Component{
     
     render() {
     return (
-        <div>
-        <ReactMic
-            record={this.state.record}
-            className="sound-wave"
-            onStop={this.onStop}
-            strokeColor="#000000"
-            backgroundColor="#FF4081" />
-        <button onClick={this.startRecording} type="button">Start</button>
-        <button onClick={this.stopRecording} type="button">Stop</button>
+        <div className="flexbox">
+            <GifPlayer autoplay={true} gif={require('../assets/gifs/frog.gif')} />
         </div>
     );
     }

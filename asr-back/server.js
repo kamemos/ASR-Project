@@ -8,6 +8,7 @@ var inSecureServer = http.createServer(app).listen(3001,function(){
 var io = require('socket.io')(inSecureServer);
 
 io.on('connection', function(client){
+    console.log('new client')
     client.on('event-kaldi', function(data){
         console.log('event-kaldi',data);
         io.emit('event-kaldi', {
