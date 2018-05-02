@@ -73,8 +73,6 @@ class Playing extends React.Component{
             return;
         }
 
-        
-
         return (
             <div className="flexbox">
                 <div className="flexbox-row">
@@ -82,7 +80,7 @@ class Playing extends React.Component{
                 {uncertainBox()}
                 </div>
                 <div style={{margin:'auto',marginTop:'30px'}} className="swing">
-                    <p className="playingText"><i style={{fontSize:"150%",color:'#f4f4f4'}}>Now Playing...</i>   {this.state.songname}</p>
+                    <p className="playingText"><i style={{fontSize:"150%",color:'#f4f4f4'}}>{this.state.currentState}...</i>   {this.state.songname}</p>
                 </div>
 
             </div>
