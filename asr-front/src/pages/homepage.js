@@ -18,12 +18,11 @@ class HomePage extends React.Component{
 
     componentDidMount(){
         this.socket.on('event-kaldi',(data)=>{
-            switch(data.msg){
-                case 'ว่าง':
-                    this.setState({data: data.msg})
-                case 'มาละ':
-                    this.setState({data: data.msg})
-                    this.setState({redirect: true})
+            if (data.msg === "ว่าง"){
+                this.setState({data: data.msg})
+            }
+            else if (data.msg ==='มาละ'){
+                this.setState({data: data.msg,redirect:true})
             }
         })
     }
