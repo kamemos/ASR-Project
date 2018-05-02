@@ -6,6 +6,8 @@
 # testing
 /coverage
 
+/asr-client
+
 # production
 /build
 

@@ -23,11 +23,9 @@ class HomePage extends React.Component{
                     this.setState({data: data.msg})
                 case 'มาละ':
                     this.setState({data: data.msg})
+                    this.setState({redirect: true})
             }
         })
-        if (this.state.wait){
-            setInterval(()=>{this.setState({redirect:true})},2000)
-        }
     }
     
     render() {
