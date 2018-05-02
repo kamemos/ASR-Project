@@ -19,6 +19,9 @@ class Playing extends React.Component{
     componentDidMount(){
         this.setState({randomInt : Math.floor(Math.random() * (5 - 1 + 1) ) + 1})
         this.socket.on('event-kaldi',(data)=>{
+            if (data.msg === 'มาละ'){
+                return
+            }
             console.log(data);
             var sentence, songname, path, songType, certainty;
             var arr = data.msg.split(',');
@@ -44,9 +47,27 @@ class Playing extends React.Component{
     render() {
         const element = () =>{
             if(this.state.currentState == 'playing'){
-                return (
-                    <GifPlayer autoplay={true} gif={require('../assets/gifs/playing.gif')} className="playingGif"/>  
-                )
+                let type = this.state.songType;
+                if (type === 'อีดีเอ็ม'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else if (type === 'ป๊อป'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-1.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else if (type === 'สุ่ม'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else {
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
+                    )
+                }
             } else if (this.state.currentState == 'stop'){
                 let type = this.state.songType;
                 if (type === 'อีดีเอ็ม'){
