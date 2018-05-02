@@ -10,7 +10,7 @@ class Playing extends React.Component{
         this.state = {
             songname : '',
             currentState : 'stop',
-            randomInt : ''
+            songType : 'สุ่ม'
         }
         this.socket = io('http://localhost:3001/')
     }
@@ -19,11 +19,12 @@ class Playing extends React.Component{
         this.setState({randomInt : Math.floor(Math.random() * (5 - 1 + 1) ) + 1})
         this.socket.on('event-kaldi',(data)=>{
             console.log(data);
-            var sentence, songname, path;
+            var sentence, songname, path, songType;
             [sentence, songname, path] = data.msg.split(',');
             console.log('sentence: ',sentence);
             console.log('songname: ',songname);
             this.setState({songname: songname});
+            this.setState({songType: songType});
             switch(sentence){
                 case 'หยุดเล่นเพลง':
                     this.setState({currentState: 'stop'});
@@ -41,27 +42,19 @@ class Playing extends React.Component{
                     <center><GifPlayer autoplay={true} gif={require('../assets/gifs/playing.gif')} className="playingGif"/></center>   
                 )
             } else if (this.state.currentState == 'stop'){
-                let randomInt = this.state.randomInt
-                switch(randomInt){
-                    case 1:
+                let type = this.state.songType;
+                switch(type){
+                    case 'อีดีเอ็ม':
+                        return (
+                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
+                        )
+                    case 'ป๊อป':
                         return (
                             <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-1.gif')} className="playingGif"/></center>  
                         )
-                    case 2:
+                    case 'สุ่ม':
                         return (
                             <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
-                        )
-                    case 3:
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-3.gif')} className="playingGif"/></center>  
-                        )
-                    case 4:
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-4.gif')} className="playingGif"/></center>  
-                        )
-                    case 5:
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
                         )
                 }
             }
