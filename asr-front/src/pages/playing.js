@@ -31,11 +31,11 @@ class Playing extends React.Component{
             }
             this.setState({songname: songname});
             this.setState({songType: songType});
-            switch(sentence){
-                case 'หยุดเล่นเพลง':
-                    this.setState({currentState: 'stop'});
-                case 'กำลังเล่นเพลง':
-                    this.setState({currentState: 'playing'});
+            if (sentence === 'หยุดเล่นเพลง'){
+                this.setState({currentState: 'stop'});
+            }
+            else if (sentence === 'กำลังเล่นเพลง'){
+                this.setState({currentState: 'playing'});
             }  
         })
     }
@@ -49,19 +49,25 @@ class Playing extends React.Component{
                 )
             } else if (this.state.currentState == 'stop'){
                 let type = this.state.songType;
-                switch(type){
-                    case 'อีดีเอ็ม':
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
-                        )
-                    case 'ป๊อป':
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-1.gif')} className="playingGif"/></center>  
-                        )
-                    case 'สุ่ม':
-                        return (
-                            <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
-                        )
+                if (type === 'อีดีเอ็ม'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else if (type === 'ป๊อป'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-1.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else if (type === 'สุ่ม'){
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
+                    )
+                }
+                else {
+                    return (
+                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
+                    )
                 }
             }
         }
