@@ -10,7 +10,8 @@ class Playing extends React.Component{
         this.state = {
             songname : '',
             currentState : 'stop',
-            songType : 'สุ่ม'
+            songType : 'สุ่ม',
+            isCertain : true
         }
         this.socket = io('http://localhost:3001/')
     }
@@ -19,10 +20,15 @@ class Playing extends React.Component{
         this.setState({randomInt : Math.floor(Math.random() * (5 - 1 + 1) ) + 1})
         this.socket.on('event-kaldi',(data)=>{
             console.log(data);
-            var sentence, songname, path, songType;
-            [sentence, songname, path] = data.msg.split(',');
-            console.log('sentence: ',sentence);
-            console.log('songname: ',songname);
+            var sentence, songname, path, songType, certainty;
+            var arr = data.msg.split(',');
+            if(arr.length == 3){
+                [sentence, songname, path] = arr;
+            }else{
+                [sentence, songname, path, songType, certainty] = arr;
+                if(certainty == 'มั่นใจ') this.setState({isCertain: true});
+                else this.setState({isCertain: false});
+            }
             this.setState({songname: songname});
             this.setState({songType: songType});
             switch(sentence){
@@ -60,11 +66,19 @@ class Playing extends React.Component{
             }
         }
 
+        const uncertainBox = () =>{
+            if(!this.state.isCertain) return(
+                <div className="circle">ว่าไงนะ?</div>
+            );
+            return;
+        }
+
         
 
         return (
             <div className="flexbox">
                 {element()}
+                {uncertainBox()}
                 <div className="playingTextBox">
 
                     <p className="playingText">Now Playing...  {this.state.songname}</p>
