@@ -69,27 +69,9 @@ class Playing extends React.Component{
                     )
                 }
             } else if (this.state.currentState == 'stop'){
-                let type = this.state.songType;
-                if (type === 'อีดีเอ็ม'){
-                    return (
-                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-5.gif')} className="playingGif"/></center>  
-                    )
-                }
-                else if (type === 'ป๊อป'){
-                    return (
-                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-1.gif')} className="playingGif"/></center>  
-                    )
-                }
-                else if (type === 'สุ่ม'){
-                    return (
-                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
-                    )
-                }
-                else {
-                    return (
-                        <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-dance-2.gif')} className="playingGif"/></center>  
-                    )
-                }
+                return (
+                    <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-cry.gif')} className="playingGif"/></center>  
+                )
             }
         }
 
