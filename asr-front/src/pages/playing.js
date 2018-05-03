@@ -9,8 +9,8 @@ class Playing extends React.Component{
         super(props);
         this.state = {
             songname : '',
-            currentState : 'stop',
-            songType : 'สุ่ม',
+            currentState : '',
+            songType : '',
             isCertain : true
         }
         this.socket = io('http://localhost:3001/')
@@ -25,7 +25,7 @@ class Playing extends React.Component{
             console.log(data);
             var sentence, songname, path, songType, certainty;
             var arr = data.msg.split(',');
-            if(arr.length == 3){
+            if(arr.length === 3){
                 [sentence, songname, path] = arr;
             }else{
                 [sentence, songname, path, songType, certainty] = arr;
@@ -73,6 +73,11 @@ class Playing extends React.Component{
                     <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-cry.gif')} className="playingGif"/></center>  
                 )
             }
+            else {
+                return(
+                    <center><GifPlayer autoplay={true} gif={require('../assets/gifs/pepe-wow.gif')} className="playingGif"/></center>  
+                )
+            }
         }
 
         const uncertainBox = () =>{
@@ -87,12 +92,12 @@ class Playing extends React.Component{
                 <div className="flexbox-row">
                 {element()}
                 {uncertainBox()}
+                {(this.state.currentState === '') ? (<div style={{':hover': {}}} className="circle">สวัสดี...<br/>ชาวโลก</div>): 
+                                                    (<div hidden/>)}
                 </div>
-
                 <div style={{margin:'auto',marginTop:'30px'}} className="swing">
                     <p className="playingText"><i style={{fontSize:"150%",color:'#f4f4f4'}}>{this.state.currentState}</i> : {this.state.songname}</p>
-                </div>
-
+                </div> 
             </div>
 
         );
