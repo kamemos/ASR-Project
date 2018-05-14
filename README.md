@@ -1,7 +1,7 @@
 # DJKaldi-Webapp
 This is a part of the DJKaldi, Speech recongnition project which displays the command from DJKaldi bot.
 
-## Getting start
+## Get started
 
   get the DJkaldi bot via [link](https://github.com/Pongpisit-Thanasutives/DjKaldi)
 
